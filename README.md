@@ -1,8 +1,8 @@
-# HPR_LVL1
-High Powered Rocket Level1
-# L1Rocket | High Powered Model Rocket Level-1
+# HPR_LVL1 | High Powered Model Rocket Level-1
 ### (as per NAR --> Rocket motors from Classes):
 ![image](https://github.com/yup-VARUN/L1Rocket/assets/110617721/90c8edc8-8cfb-430f-9047-7eff27ad1070)
+FAA governs the US air space For guidelines refer to: https://www.faa.gov/air_traffic/publications/atpubs/pham_html/chap31_section_1.html#:~:text=Class%202%20%2D%20a%20high%20power,pound%2Dseconds)%20or%20less.
+
 
 ## Gameplan:
 Step 1: Shortlist all of the sensors, actuators, microcontrollers, and other hardware components that would be the perfect fit for the given problem statement.
@@ -31,6 +31,10 @@ Step 9: Solder everything together.
 - Activate the buzzer after some delay.
 
 ## Components Specifications:
+
+__Rocket Motor:__
+
+
 __Sensors:__
 - Pressure Sensor: BMP280 | For altitude
 - Accelerometer & Gyroscope: MPU6050 | For Navigation (inertial measurement unit)
