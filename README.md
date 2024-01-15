@@ -33,7 +33,7 @@ Step 9: Solder everything together.
 ## Components Specifications:
 
 __Rocket Motor:__
-
+- Class I Rocket Motor
 
 __Sensors:__
 - Pressure Sensor: BMP280 | For altitude
