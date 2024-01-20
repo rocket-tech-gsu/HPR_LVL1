@@ -30,7 +30,9 @@ Step 9: Solder everything together.<br>
 - Write all of the data from flash chips to SD Card,
 - Activate the buzzer after some delay.
 
-## Optional Functions
+## Optional Functions:
+- Reaction Wheel for stabilization along the Roll Axis(Along the rocket's body, pointing along the nose cone)
+- Fin Control/Thrust Vector Control
 
 ## Components Specifications:
 
