@@ -19,8 +19,7 @@ Step 9: Solder everything together.<br>
 - Sensor Calibration,
 - Test and initiate the telemetry and share the data through telemetry,
 - Final Health checkup & report over telemetry("say ready for launch if everything is responding as it should"),
-- Ignition Sequence activated with a wireless command,
-- Ignite the rocket motor with a wireless command,
+- Ignition Sequence: <br>Check if the rocket is upright<br>-> Buzzer n Light flash for Launch Alert <br>-> Update the IMU reference <br>-> Start Camera Recording <br>-> Listen for the final confirmation via Telemetry <br>-> Set the ignition charges to HIGH for 4 seconds
 - Detect the apogee, 
 - Eject the parachute,
 - Data logging(save the sensor locally on the flight computer),
@@ -30,6 +29,8 @@ Step 9: Solder everything together.<br>
 - Send the location through the LoRa module,
 - Write all of the data from flash chips to SD Card,
 - Activate the buzzer after some delay.
+
+## Optional Functions
 
 ## Components Specifications:
 
