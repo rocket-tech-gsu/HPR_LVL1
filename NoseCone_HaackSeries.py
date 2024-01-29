@@ -1,8 +1,18 @@
 # Author - Varun Ahlawat
 ''' 
-Description - Takes in the arguments like height of the nose cone and the Haack constant for the Hack series, then 
-creates a spline as a sketch that fits the curve geometry. Then an offset curve is added to the sketch 
-Which is then closed to make an area enclosing curve. The enclosed area is then finally revolved around the axis.'''
+Description - 
+Nose Cone geometry can make or break the performance of any fast-moving craft through air. It is the part that faces almost all the aerodynamic drag.
+It can create shock waves that interact with the rest of the craft in very interesting ways.
+This allows the user to make an optimized nose cone for the rockets if you know the Haack Constant for it.
+
+The Haack's constant depends on your flow regime, i.e. how fast is your rocket going to fly, and the diameter of the rest of your rocket.
+During the optimization, i.e. finding the best value of Haack's constant for your craft, there must be some boundary conditions! is bounded by factors like mass, which must be bounded 
+
+The following Python script is written as per the fusion360 documentation, it takes in the following arguments: 
+- the height of the nose cone 
+- the Haack constant for the Hack series
+Then it creates a spline as a sketch that fits the curve geometry. Then an offset curve is added to the sketch
+which is then closed to make an area enclosing a curve. The enclosed area is then finally revolved around the axis.'''
 
 import adsk.core, adsk.fusion, adsk.cam, traceback, math
 
