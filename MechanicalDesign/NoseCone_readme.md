@@ -2,7 +2,7 @@ Nose cones could be made from curves like a parabola, or a section of a circle(s
 
 # HAACK SERIES:
 I've made an animation for the Haack Series Curve on Desmos, feel free to play with it:
-https://www.desmos.com/calculator/ssogxdsf9f?embed
+https://www.desmos.com/calculator/xrsrazbr0i
 <img width="1476" alt="Screenshot 2024-01-29 at 5 28 16 PM" src="https://github.com/rocket-tech-gsu/HPR_LVL1/assets/110617721/65aac82e-d4ef-4e26-b128-77e5667f9758">
 
 Haack Series Curve:
