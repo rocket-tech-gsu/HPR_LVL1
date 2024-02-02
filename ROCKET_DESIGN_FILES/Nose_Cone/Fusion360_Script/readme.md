@@ -1,0 +1,20 @@
+# Fusion360:
+- Fusion360 had no support for making curves from mathematical equations
+- So simple equations for example even a basic curve y=f(x) cannot be plotted as a curve.
+- That's where Fusion360's API comes in:
+> - The packages are made by autodesk and therefore the name of the package is abbriviated as "adsk".
+> - Some of the important libraries in it are "core", "fusion", and "cam".
+> - This code uses all three of the aforementioned and some python libraries("math" and "traceback").
+## Code Breakdown:
+- The way the Fusion360 API works, locally in your system, is that it will automatically call a single function name "run".
+- Autodesk's core package("adsk.core") has an "Application" method in it, which in turn has "get" class.
+- We make an instance(object) of that get class by "adsk.core.Application.get()".
+- There's an "userInterface" method in that class that allows us to interact with the fusion360's UI.
+- We can store the instance of that in a variable, let's call it "ui".
+
+**With it we can do things like:**
+> - Display messages via "messageBox".
+> - Get user's input via "inputBox".
+
+## Discretization of a continuous function(because binary bits can't do continuous computations):
+- 
