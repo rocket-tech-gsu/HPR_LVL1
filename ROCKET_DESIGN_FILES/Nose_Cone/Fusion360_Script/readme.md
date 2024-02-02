@@ -15,12 +15,19 @@ ________________________________________________________________________________
 - We make an instance(object) of that get class by "adsk.core.Application.get()".
 - There's an "userInterface" method in that class that allows us to interact with the fusion360's UI.
 - We can store the instance of that in a variable, let's call it "ui".
+- Get the 
 
 **With it we can do things like:**
 > - Display messages via "messageBox".
 > - Get user's input via "inputBox".
 
 ### 2. Interacting with the fusion360 objects:
+- in the instance of "adsk.core.Application.get()", there are the following attributes: ".activeProduct.rootComponent".
+- **VERY IMP!**
+-  You'll be able to **access sketches**, **create new sketches**, **construct planes**, ... etc. 
+- Access Sketches: "root_comp.sketches"
+- Construct a Sketch Plane: "xYConstructionPlane"
+- Create Sketches: "root_comp.sketches.add(the_construction_plane_that_you_just_made)"
 - There's another class in core module of the adsk package, it's called "ObjectCollection".
 - That, in turn, has a class called "create".
 > Guess what does it do, create objects.(you be like OFCOURSEEE, lol! writing documentation is kinda fun)
