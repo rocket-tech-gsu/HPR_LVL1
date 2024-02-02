@@ -16,5 +16,5 @@
 > - Display messages via "messageBox".
 > - Get user's input via "inputBox".
 
-## Discretization of a continuous function(because binary bits can't do continuous computations):
+## Discretization of a continuous math function(because binary bits can't do continuous computations):
 - 
