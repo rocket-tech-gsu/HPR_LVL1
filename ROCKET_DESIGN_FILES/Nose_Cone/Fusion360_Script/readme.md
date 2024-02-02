@@ -22,6 +22,7 @@ ________________________________________________________________________________
 > - Get user's input via "inputBox".
 
 ### 2. Interacting with the fusion360 objects:
+- At a time any component in the fusion360 object hiearchy could be activated, the one that is activated is called root component.
 - in the instance of "adsk.core.Application.get()", there are the following attributes: ".activeProduct.rootComponent".
 - **VERY IMP!**
 -  You'll be able to **access sketches**, **create new sketches**, **construct planes**, ... etc. 
