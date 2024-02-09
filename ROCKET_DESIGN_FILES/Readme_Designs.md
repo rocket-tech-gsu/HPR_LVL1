@@ -27,6 +27,6 @@ AVIONICS BAY DESIGN:
 
 
 FIN CAN DESIGN:
-- https://1443543871-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LB423_rlWTQK_KuQzK5%2F-ML9q8Tc30hREyNcX-tV%2F-ML9tEgR7dJIOe54EEHi%2FFinGeometry.png?alt=media&token=a40cd3ad-5a02-4cb5-9cfc-fc14e914ae65![image](https://github.com/rocket-tech-gsu/HPR_LVL1/assets/110617721/21e081dd-c94a-465f-b768-c4aa3cf878f5)
+- <img width="1497" alt="image" src="https://1443543871-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LB423_rlWTQK_KuQzK5%2F-ML9q8Tc30hREyNcX-tV%2F-ML9tEgR7dJIOe54EEHi%2FFinGeometry.png?alt=media&token=a40cd3ad-5a02-4cb5-9cfc-fc14e914ae65">
 - Based upon OpenRocket Simulation we got following most optimized parameters:
 - <img width="1497" alt="image" src="https://github.com/rocket-tech-gsu/HPR_LVL1/assets/110617721/9bb8c6ab-aa71-44c3-9780-7abf199f4d98">
