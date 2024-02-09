@@ -1,4 +1,4 @@
-# Let's talk about the designs
+# Let's talk about designing Rockets
 Things to be taken care of in the design:
 
 NOSE CONE DESIGN:
