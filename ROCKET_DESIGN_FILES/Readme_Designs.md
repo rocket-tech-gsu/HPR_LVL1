@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Let's talk about the designs
+=======
+# Let's talk about designing Rockets
+>>>>>>> ada57bbd9d2ad8b40cadd9c8be98130145ac7103
 Things to be taken care of in the design:
 
 NOSE CONE DESIGN:
@@ -27,3 +31,17 @@ AVIONICS BAY DESIGN:
 
 
 FIN CAN DESIGN:
+<<<<<<< HEAD
+=======
+- Keep in mind that at high speeds:
+  - fins faces enormous amounts of stresses hence the joint between fins and the fin can must be very strong.
+  - if all of the fins are not symmetrical then it'll rotate very fast, which will lead to poor wireless communication and will ruin the video footage.
+  - While attaching the fins to the fin can, they could be canted at very small angles like 0.1 degrees, which will again lead to same consequences.
+- To rectify these error possibilities, the fin assembling must be done with a very precise assembling unit. It should be able to ensure perfect orientation of each fin and should have stand that could be put on table or something. Also, there should be firm and sturdy clamps for each fin so that throughout the curing process nothing moves.
+  - <img width="300" alt="image" src="https://1443543871-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LB423_rlWTQK_KuQzK5%2F-ML9q8Tc30hREyNcX-tV%2F-ML9tEgR7dJIOe54EEHi%2FFinGeometry.png?alt=media&token=a40cd3ad-5a02-4cb5-9cfc-fc14e914ae65">
+- Based upon OpenRocket Simulation we got following most optimized parameters:
+  - <img width="1497" alt="image" src="https://github.com/rocket-tech-gsu/HPR_LVL1/assets/110617721/9bb8c6ab-aa71-44c3-9780-7abf199f4d98">
+- Fusion360 Design:
+  - ![Fin_Can v3](https://github.com/rocket-tech-gsu/HPR_LVL1/assets/110617721/ad8f81ec-7d31-4d6d-999d-8c77b2c21cac)  
+- <img width="300" alt="image" src="https://www.nakka-rocketry.net/pix/finaero.gif"> (credits:https://www.nakka-rocketry.net/fins.html)
+>>>>>>> ada57bbd9d2ad8b40cadd9c8be98130145ac7103

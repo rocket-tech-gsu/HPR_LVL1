@@ -69,6 +69,7 @@ __Algorithms:__
 
 __Pyro Channels:__
 - MOSFETs
+- 900mAh LiPo Battery by Apogee (Model:09204)
 
 __Microcontroller:__
 - Atmega328P
