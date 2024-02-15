@@ -1,0 +1,13 @@
+{
+	"autodeskProduct":	"Fusion360",
+	"type":	"addin",
+	"id":	"eeb3831c-d048-4633-bfde-b3ac49ec8b49",
+	"author":	"",
+	"description":	{
+		"":	"Generates points by looping on x axis(starting from the initial x value to the last x value).\nFits a spline on those curves using a fit point spline."
+	},
+	"version":	"",
+	"runOnStartup":	false,
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}
