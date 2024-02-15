@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      border: 1px solid #000;
+      background-color: #000;
+    }
+  </style>
+  <title>Colliding Bouncing Balls Simulation</title>
+</head>
+<body>
+  <label for="numBalls">Number of Balls:</label>
+  <input type="number" id="numBalls" min="1" value="500">
+  <label for="particleSize">Particle Size:</label>
+  <input type="number" id="particleSize" min="1" value="4">
+  <label for="velocity">Velocity:</label>
+  <input type="number" id="velocity" min="1" value="10">
+  <button onclick="restartSimulation()">Restart Simulation</button>
+
+  <canvas id="bouncingBallCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('bouncingBallCanvas');
+    const ctx = canvas.getContext('2d');
+    let balls = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function restartSimulation() {
+      const numBalls = parseInt(document.getElementById('numBalls').value, 10) || 1;
+      const particleSize = parseInt(document.getElementById('particleSize').value, 10) || 20;
+      const velocity = parseInt(document.getElementById('velocity').value, 10) || 4;
+
+      balls = [];
+
+      for (let i = 0; i < numBalls; i++) {
+        balls.push({
+          x: Math.random() * (canvas.width - 2 * particleSize) + particleSize,
+          y: Math.random() * (canvas.height - 2 * particleSize) + particleSize,
+          radius: particleSize,
+          color: `rgb(${255}, ${255}, ${255})`,
+          dx: (Math.random() - 0.5) * velocity, // horizontal velocity
+          dy: (Math.random() - 0.5) * velocity, // vertical velocity
+        });
+      }
+    }
+
+    function drawBall(ball) {
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = ball.color;
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function update() {
+      const gravity = 0.2;
+
+      for (let i = 0; i < balls.length; i++) {
+        const ball1 = balls[i];
+
+        // Apply gravity
+        ball1.dy += gravity;
+
+        // Update ball position
+        ball1.x += ball1.dx;
+        ball1.y += ball1.dy;
+
+        // Bounce off the walls
+        if (ball1.x + ball1.radius > canvas.width || ball1.x - ball1.radius < 0) {
+          ball1.dx = -ball1.dx * 0.8;
+        }
+
+        if (ball1.y + ball1.radius > canvas.height || ball1.y - ball1.radius < 0) {
+          ball1.dy = -ball1.dy * 0.8;
+        }
+
+        // Ensure particles stay within the canvas
+        if (ball1.x - ball1.radius < 0) {
+          ball1.x = ball1.radius;
+        }
+
+        if (ball1.x + ball1.radius > canvas.width) {
+          ball1.x = canvas.width - ball1.radius;
+        }
+
+        if (ball1.y - ball1.radius < 0) {
+          ball1.y = ball1.radius;
+        }
+
+        if (ball1.y + ball1.radius > canvas.height) {
+          ball1.y = canvas.height - ball1.radius;
+        }
+
+        // Check for collisions with other balls
+        for (let j = i + 1; j < balls.length; j++) {
+          const ball2 = balls[j];
+          const dx = ball2.x - ball1.x;
+          const dy = ball2.y - ball1.y;
+          const radiusSum = ball1.radius + ball2.radius;
+          const distanceSquared = dx * dx + dy * dy;
+
+          if (distanceSquared < radiusSum * radiusSum) {
+            // Collisions detected, adjust velocities
+            const angle = Math.atan2(dy, dx);
+            const sinA = Math.sin(angle);
+            const cosA = Math.cos(angle);
+
+            const vel1 = rotate(ball1.dx, ball1.dy, sinA, cosA);
+            const vel2 = rotate(ball2.dx, ball2.dy, sinA, cosA);
+
+            // Swap velocities with velocity reduction
+            [ball1.dx, ball1.dy] = rotate(vel2[0] * 0.995, vel2[1] * 0.995, -sinA, cosA);
+            [ball2.dx, ball2.dy] = rotate(vel1[0] * 0.995, vel1[1] * 0.995, -sinA, cosA);
+          }
+        }
+      }
+    }
+
+    function draw() {
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw all the balls
+      balls.forEach(drawBall);
+    }
+
+    function animate() {
+      update();
+      draw();
+      requestAnimationFrame(animate);
+    }
+
+    function rotate(dx, dy, sinA, cosA) {
+      return [dx * cosA - dy * sinA, dx * sinA + dy * cosA];
+    }
+
+    restartSimulation();
+    animate();
+  </script>
+</body>
+</html>
