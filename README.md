@@ -53,7 +53,7 @@ __Rocket Motor:__
 - Class I Rocket Motor
 
 __Sensors:__
-- Pressure Sensor: BMP280 | For altitude
+- Pressure Sensor: ~~BMP280 (deprecated)~~ [BMP390](https://www.adafruit.com/product/4816) | For altitude
 - Accelerometer & Gyroscope: MPU6050 | For Navigation (inertial measurement unit)
 - GPS Module: NEO-6M | For location sensing
 - Magnetometer: GY-273 | For orientation sensing
@@ -72,7 +72,8 @@ __Pyro Channels:__
 - 900mAh LiPo Battery by Apogee (Model:09204)
 
 __Microcontroller:__
-- Atmega328P
+- ATmega328P (deprecated)
+- [ATmega328BP](https://www.microchip.com/en-us/product/atmega328pb)
 
 __Memory:__
 - Flash memory chip: FLASH - NOR Memory IC 256Mbit SPI - Quad I/O 133 MHz 16-SOIC | Storing the data reliably(soldered connections), quickly(133 MHz)

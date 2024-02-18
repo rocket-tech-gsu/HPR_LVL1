@@ -1,6 +1,6 @@
 # Avionics:
 
-- At the heart of each rocket is a flight computer. It is responsible for ejecting the parachute, sensing the trajectory, appogee altitude and all sorts of things.
+- At the heart of each rocket is a flight computer. It is responsible for ejecting the parachute, sensing the trajectory, apogee altitude and all sorts of things.
 Our goal with this flight computer will be to make a flight computer that we can use again and again in future for upcoming rockets.
 
 - Avionics101:
@@ -22,6 +22,6 @@ Our goal with this flight computer will be to make a flight computer that we can
 - Capacitors
 - Resistors
 - Transmitter
-- Reciever
+- Receiver
 - Shot key diode
 - 
