@@ -1,8 +1,0 @@
-# This is Git's per-user configuration file.
-[user]
-# Please adapt and uncomment the following lines:
-#	name = Varun Ahlawat
-#	email = varunahlawat@Varuns-MBP.wifi.gsu.ed
-
-git push
-
