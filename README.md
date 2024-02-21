@@ -20,19 +20,19 @@ Step 9: Solder everything together.<br>
 - Test and initiate the telemetry and share the data through telemetry,
 - Final Health checkup & report over telemetry("say ready for launch if everything is responding as it should"),
 - Ignition Sequence: <br>
-  -> Check if the rocket is upright.<br>
-  -> Start logging the raw data from all sensors in the Flash memory chip.<br>
-  -> Buzzer n Light flash for Launch Alert. <br>
-  -> Update the IMU reference. <br>
-  -> Start the Camera Recording. <br>
-  -> Listen for the final confirmation signal over the Telemetry. <br>
-  -> Set the ignition charges to "HIGH" for 4 seconds.
+  - Check if the rocket is upright.<br>
+  - Start logging the raw data from all sensors in the Flash memory chip.<br>
+  - Buzzer n Light flash for Launch Alert. <br>
+  - Update the IMU reference. <br>
+  - Start the Camera Recording. <br>
+  - Listen for the final confirmation signal over the Telemetry. <br>
+  - Set the ignition charges to "HIGH" for 4 seconds.
 - Determine the Altitude of the rocket in real time using: <br>
-  -> IMU(accelerometer + gyroscope) Data | Medium Low Pass Filter<br> 
-  -> Pressure Sensor Data | Aggressive Low Pass Filter<br>
-  -> GPS Z axis Data | Medium Low Pass Filter<br>
-  -> Convert all of the cleaned signals into Height<br>
-  -> Convert all of those heights into a single height using the Kalman Filter Algorithm for fusing multiple different sensors.
+  - IMU(accelerometer + gyroscope) Data | Medium Low Pass Filter<br> 
+  - Pressure Sensor Data | Aggressive Low Pass Filter<br>
+  - GPS Z axis Data | Medium Low Pass Filter<br>
+  - Convert all of the cleaned signals into Height<br>
+  - Convert all of those heights into a single height using the Kalman Filter Algorithm for fusing multiple different sensors.
 - Detect the apogee with the variation in height,
 - Eject the parachute,
 - Data logging(save the sensor locally on the flight computer),
