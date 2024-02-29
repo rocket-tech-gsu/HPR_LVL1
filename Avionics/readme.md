@@ -18,10 +18,19 @@ Our goal with this flight computer will be to make a flight computer that we can
 - Sensors:
   - Accelerometer
   - Gyroscope
-  - 
+  - Pressure Sensor
+  - Cameras
 - Capacitors
 - Resistors
 - Transmitter
 - Receiver
 - Shot key diode
-- 
+- Flash Memory Chip
+- N channel efficieny type MOSFET
+- Screw Button
+---------
+# Run Eagle files in your computer:
+- For library, you have to download and move in your personal libraries directory.
+- Just copy & paste this Power Supplies Folder in the projects directory of Eagle in your systems.
+- or you can also just copy & paste the .brd & .sch files in a folder in your Eagle's project folder directory.
+
