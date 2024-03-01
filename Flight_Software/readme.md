@@ -1,4 +1,4 @@
-## Flight software
+# Flight Software
 
 # Read Sensor Data:
 
