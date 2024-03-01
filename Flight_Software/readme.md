@@ -1,5 +1,3 @@
-
-
 # Read Sensor Data:
 
 # Data Logging:
