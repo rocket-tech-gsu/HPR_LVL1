@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Let's talk about the designs
 =======
 # Let's talk about designing Rockets
@@ -31,7 +30,7 @@ AVIONICS BAY DESIGN:
 
 
 FIN CAN DESIGN:
-<<<<<<< HEAD
+
 =======
 - Keep in mind that at high speeds:
   - fins faces enormous amounts of stresses hence the joint between fins and the fin can must be very strong.
