@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Let's talk about the designs
-=======
 # Let's talk about designing Rockets
->>>>>>> ada57bbd9d2ad8b40cadd9c8be98130145ac7103
 Things to be taken care of in the design:
 
 NOSE CONE DESIGN:
@@ -31,8 +27,7 @@ AVIONICS BAY DESIGN:
 
 
 FIN CAN DESIGN:
-<<<<<<< HEAD
-=======
+
 - Keep in mind that at high speeds:
   - fins faces enormous amounts of stresses hence the joint between fins and the fin can must be very strong.
   - if all of the fins are not symmetrical then it'll rotate very fast, which will lead to poor wireless communication and will ruin the video footage.
@@ -44,4 +39,3 @@ FIN CAN DESIGN:
 - Fusion360 Design:
   - ![Fin_Can v3](https://github.com/rocket-tech-gsu/HPR_LVL1/assets/110617721/ad8f81ec-7d31-4d6d-999d-8c77b2c21cac)  
 - <img width="300" alt="image" src="https://www.nakka-rocketry.net/pix/finaero.gif"> (credits:https://www.nakka-rocketry.net/fins.html)
->>>>>>> ada57bbd9d2ad8b40cadd9c8be98130145ac7103
