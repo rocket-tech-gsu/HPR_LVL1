@@ -1,17 +1,17 @@
 # Flight Software
 
-# Read Sensor Data:
+## Read Sensor Data:
 
-# Data Logging:
+## Data Logging:
 
-# Radio Communication:
+## Radio Communication:
 
-# Storing Camera Footage:
+## Storing Camera Footage:
 
-# Ejection:
+## Ejection:
 
 
-# Chores:
+# Sequence of events:
 - Launch Sequence:
     - System Health Checkup
         - Battery Levels
