@@ -1,4 +1,4 @@
-# Avionics:
+# Avionics: 
 
 - At the heart of each rocket is a flight computer. It is responsible for ejecting the parachute, sensing the trajectory, apogee altitude and all sorts of things.
 Our goal with this flight computer will be to make a flight computer that we can use again and again in future for upcoming rockets.
