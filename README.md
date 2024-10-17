@@ -22,8 +22,13 @@ __Algorithms:__
   - State Estimators
   - Kalman filter
 
+to be completed ...
 
-# Design Organization:
+# Design Overview:
+to be written ...
+
+# Avionics Overview:
+to be written ...
 
 
 ### Future Experimental Functionalities/Payloads:
