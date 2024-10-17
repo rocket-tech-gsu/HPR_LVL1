@@ -36,6 +36,11 @@ __STEP 3:__ Setting up the project folder:
         <img src="repository.png" width="60%" height="auto" alt="platform_io_screenshot"><br>
         It's just that the PlatformIO likes to open its project folder separately, even if it is open already!
 
+__<u>STEP 4:</u>__ Building & Pushing:
+New buttons should appear in the bottom ribbon of the visual studio code:![alt text](Build_n_push.png)
+- If you'll click on the tick button, it'll build the executible(to learn more, read the aforementioned Comp Sci paragraph).
+- If you'll click the Right Pointing Arror button, the executible will be flashed into your USB connected micrcontroller(if your port, driver and USB cable are all working properly).
+
 Enjoy some `c++` :)
 
 <hr>

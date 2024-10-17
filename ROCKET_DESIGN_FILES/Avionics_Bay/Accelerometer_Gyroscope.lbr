@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE eagle SYSTEM "eagle.dtd">
+<eagle version="9.6.2">
+<drawing>
+<settings>
+<setting alwaysvectorfont="no"/>
+<setting verticaltext="up"/>
+</settings>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<layers>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="2" name="Route2" color="16" fill="1" visible="no" active="yes"/>
+<layer number="3" name="Route3" color="17" fill="1" visible="no" active="yes"/>
+<layer number="4" name="Route4" color="18" fill="1" visible="no" active="yes"/>
+<layer number="5" name="Route5" color="19" fill="1" visible="no" active="yes"/>
+<layer number="6" name="Route6" color="25" fill="1" visible="no" active="yes"/>
+<layer number="7" name="Route7" color="26" fill="1" visible="no" active="yes"/>
+<layer number="8" name="Route8" color="27" fill="1" visible="no" active="yes"/>
+<layer number="9" name="Route9" color="28" fill="1" visible="no" active="yes"/>
+<layer number="10" name="Route10" color="29" fill="1" visible="no" active="yes"/>
+<layer number="11" name="Route11" color="30" fill="1" visible="no" active="yes"/>
+<layer number="12" name="Route12" color="20" fill="1" visible="no" active="yes"/>
+<layer number="13" name="Route13" color="21" fill="1" visible="no" active="yes"/>
+<layer number="14" name="Route14" color="22" fill="1" visible="no" active="yes"/>
+<layer number="15" name="Route15" color="23" fill="1" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
+<layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
+<layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
+<layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
+<layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
+<layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
+<layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="88" name="SimResults" color="9" fill="1" visible="yes" active="yes"/>
+<layer number="89" name="SimProbes" color="9" fill="1" visible="yes" active="yes"/>
+<layer number="90" name="Modules" color="5" fill="1" visible="yes" active="yes"/>
+<layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="93" name="Pins" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="94" name="Symbols" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="95" name="Names" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
+</layers>
+<library>
+<packages>
+<package name="GY521" urn="urn:adsk.eagle:footprint:43081946/1">
+<description>MPU6050, Dimensions (excluding pins): 21.2mm (0.84") length x 16.4mm (0.65") width x 3.3mm (0.13") height</description>
+<wire x1="0" y1="16.51" x2="0" y2="0" width="0.127" layer="21"/>
+<wire x1="0" y1="0" x2="21.59" y2="0" width="0.127" layer="21"/>
+<wire x1="21.59" y1="0" x2="21.59" y2="16.51" width="0.127" layer="21"/>
+<wire x1="21.59" y1="16.51" x2="0" y2="16.51" width="0.127" layer="21"/>
+<wire x1="19.05" y1="5.08" x2="19.05" y2="7.62" width="0.127" layer="21"/>
+<wire x1="19.05" y1="5.08" x2="16.51" y2="5.08" width="0.127" layer="21"/>
+<pad name="VCC" x="1.905" y="1.27" drill="0.6"/>
+<pad name="GND" x="4.445" y="1.27" drill="0.6"/>
+<pad name="SCL" x="6.985" y="1.27" drill="0.6"/>
+<pad name="SDA" x="9.525" y="1.27" drill="0.6"/>
+<pad name="XDA" x="12.065" y="1.27" drill="0.6"/>
+<pad name="XCL" x="14.605" y="1.27" drill="0.6"/>
+<pad name="ADD" x="17.145" y="1.27" drill="0.6"/>
+<pad name="INT" x="19.685" y="1.27" drill="0.6"/>
+<text x="3.81" y="10.16" size="1.27" layer="21">MPU6050(GY521)</text>
+<text x="19.685" y="7.62" size="1.27" layer="21" rot="R90">&gt;</text>
+<text x="16.51" y="5.715" size="1.27" layer="21" rot="R180">&lt;</text>
+<text x="19.685" y="9.525" size="1.27" layer="21" rot="R270">X</text>
+<text x="13.97" y="4.445" size="1.27" layer="21" rot="R270">Y</text>
+<hole x="2.54" y="13.97" drill="0.762"/>
+<hole x="19.05" y="13.97" drill="0.762"/>
+</package>
+<package name="MPU6050_SMD">
+<wire x1="0" y1="0" x2="0" y2="4.064" width="0.127" layer="21"/>
+<wire x1="0" y1="4.064" x2="4.064" y2="4.064" width="0.127" layer="21"/>
+<wire x1="4.064" y1="4.064" x2="4.064" y2="0" width="0.127" layer="21"/>
+<wire x1="4.064" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
+<smd name="1_CLKIN" x="0" y="3.302" dx="0.6096" dy="0.3048" layer="1"/>
+<smd name="2_NC" x="0" y="2.794" dx="0.6096" dy="0.3048" layer="1"/>
+<smd name="3_NC" x="0" y="2.286" dx="0.6096" dy="0.3048" layer="1"/>
+<smd name="4_NC" x="0" y="1.778" dx="0.6096" dy="0.3048" layer="1"/>
+<smd name="5_NC" x="0" y="1.27" dx="0.6096" dy="0.3048" layer="1"/>
+<smd name="6_AUX_DA" x="0" y="0.762" dx="0.6096" dy="0.3048" layer="1"/>
+<smd name="7_AUX_CL" x="0.762" y="0" dx="0.6096" dy="0.3048" layer="1" rot="R90"/>
+<smd name="8_VLOGIC" x="1.27" y="0" dx="0.6096" dy="0.3048" layer="1" rot="R90"/>
+<smd name="9_AD0" x="1.778" y="0" dx="0.6096" dy="0.3048" layer="1" rot="R90"/>
+<smd name="10_REGOUT" x="2.286" y="0" dx="0.6096" dy="0.3048" layer="1" rot="R90"/>
+<smd name="11_FSYNC" x="2.794" y="0" dx="0.6096" dy="0.3048" layer="1" rot="R90"/>
+<smd name="12_INT" x="3.302" y="0" dx="0.6096" dy="0.3048" layer="1" rot="R90"/>
+<smd name="13_VDD" x="4.064" y="0.762" dx="0.6096" dy="0.3048" layer="1" rot="R180"/>
+<smd name="14_NC" x="4.064" y="1.27" dx="0.6096" dy="0.3048" layer="1" rot="R180"/>
+<smd name="15_NC" x="4.064" y="1.778" dx="0.6096" dy="0.3048" layer="1" rot="R180"/>
+<smd name="16_NC" x="4.064" y="2.286" dx="0.6096" dy="0.3048" layer="1" rot="R180"/>
+<smd name="17_NC" x="4.064" y="2.794" dx="0.6096" dy="0.3048" layer="1" rot="R180"/>
+<smd name="18_GND" x="4.064" y="3.302" dx="0.6096" dy="0.3048" layer="1" rot="R180"/>
+<smd name="19_RESV" x="3.302" y="4.064" dx="0.6096" dy="0.3048" layer="1" rot="R270"/>
+<smd name="20_CPOUT" x="2.794" y="4.064" dx="0.6096" dy="0.3048" layer="1" rot="R270"/>
+<smd name="21_RESV" x="2.286" y="4.064" dx="0.6096" dy="0.3048" layer="1" rot="R270"/>
+<smd name="22_RESV" x="1.778" y="4.064" dx="0.6096" dy="0.3048" layer="1" rot="R270"/>
+<smd name="23_SCL" x="1.27" y="4.064" dx="0.6096" dy="0.3048" layer="1" rot="R270"/>
+<smd name="24_SDA" x="0.762" y="4.064" dx="0.6096" dy="0.3048" layer="1" rot="R270"/>
+<text x="0.762" y="2.032" size="0.4064" layer="1">MPU6050</text>
+</package>
+<package name="QFN50P400X400X100-24N" urn="urn:adsk.eagle:footprint:43089107/1" locally_modified="yes">
+<description>24-QFN, 0.50 mm pitch, 4.00 X 4.00 X 1.00 mm body
+&lt;p&gt;24-pin QFN package with 0.50 mm pitch with body size 4.00 X 4.00 X 1.00 mm&lt;/p&gt;</description>
+<circle x="-2.504" y="1.889" radius="0.25" width="0" layer="21"/>
+<wire x1="-2" y1="1.639" x2="-2" y2="2" width="0.12" layer="21"/>
+<wire x1="-2" y1="2" x2="-1.639" y2="2" width="0.12" layer="21"/>
+<wire x1="2" y1="1.639" x2="2" y2="2" width="0.12" layer="21"/>
+<wire x1="2" y1="2" x2="1.639" y2="2" width="0.12" layer="21"/>
+<wire x1="2" y1="-1.639" x2="2" y2="-2" width="0.12" layer="21"/>
+<wire x1="2" y1="-2" x2="1.639" y2="-2" width="0.12" layer="21"/>
+<wire x1="-2" y1="-1.639" x2="-2" y2="-2" width="0.12" layer="21"/>
+<wire x1="-2" y1="-2" x2="-1.639" y2="-2" width="0.12" layer="21"/>
+<wire x1="2" y1="-2" x2="-2" y2="-2" width="0.12" layer="51"/>
+<wire x1="-2" y1="-2" x2="-2" y2="2" width="0.12" layer="51"/>
+<wire x1="-2" y1="2" x2="2" y2="2" width="0.12" layer="51"/>
+<wire x1="2" y1="2" x2="2" y2="-2" width="0.12" layer="51"/>
+<smd name="1" x="-1.9373" y="1.25" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="2" x="-1.9373" y="0.75" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="3" x="-1.9373" y="0.25" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="4" x="-1.9373" y="-0.25" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="5" x="-1.9373" y="-0.75" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="6" x="-1.9373" y="-1.25" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="7" x="-1.25" y="-1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="8" x="-0.75" y="-1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="9" x="-0.25" y="-1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="10" x="0.25" y="-1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="11" x="0.75" y="-1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="12" x="1.25" y="-1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="13" x="1.9373" y="-1.25" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="14" x="1.9373" y="-0.75" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="15" x="1.9373" y="-0.25" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="16" x="1.9373" y="0.25" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="17" x="1.9373" y="0.75" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="18" x="1.9373" y="1.25" dx="0.8373" dy="0.27" layer="1"/>
+<smd name="19" x="1.25" y="1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="20" x="0.75" y="1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="21" x="0.25" y="1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="22" x="-0.25" y="1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="23" x="-0.75" y="1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<smd name="24" x="-1.25" y="1.9373" dx="0.8373" dy="0.27" layer="1" rot="R90"/>
+<text x="-1.27" y="0" size="0.4064" layer="21">MPU6050</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="GY521" urn="urn:adsk.eagle:package:43081948/1" type="box">
+<description>MPU6050, Dimensions (excluding pins): 21.2mm (0.84") length x 16.4mm (0.65") width x 3.3mm (0.13") height</description>
+<packageinstances>
+<packageinstance name="GY521"/>
+</packageinstances>
+</package3d>
+<package3d name="QFN50P400X400X100-24N" urn="urn:adsk.eagle:package:43089087/1" type="model">
+<description>24-QFN, 0.50 mm pitch, 4.00 X 4.00 X 1.00 mm body
+&lt;p&gt;24-pin QFN package with 0.50 mm pitch with body size 4.00 X 4.00 X 1.00 mm&lt;/p&gt;</description>
+<packageinstances>
+<packageinstance name="QFN50P400X400X100-24N"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="GY521" urn="urn:adsk.eagle:symbol:43081947/1">
+<wire x1="-20.32" y1="0" x2="25.4" y2="0" width="0.254" layer="94"/>
+<wire x1="25.4" y1="0" x2="25.4" y2="30.48" width="0.254" layer="94"/>
+<wire x1="25.4" y1="30.48" x2="-20.32" y2="30.48" width="0.254" layer="94"/>
+<wire x1="-20.32" y1="30.48" x2="-20.32" y2="0" width="0.254" layer="94"/>
+<pin name="VCC" x="-15.24" y="-5.08" length="middle" rot="R90"/>
+<pin name="GND" x="-10.16" y="-5.08" length="middle" rot="R90"/>
+<pin name="SCL" x="-5.08" y="-5.08" length="middle" rot="R90"/>
+<pin name="SDA" x="0" y="-5.08" length="middle" rot="R90"/>
+<pin name="XCL" x="5.08" y="-5.08" length="middle" rot="R90"/>
+<pin name="XDA" x="10.16" y="-5.08" length="middle" rot="R90"/>
+<pin name="ADD" x="15.24" y="-5.08" length="middle" rot="R90"/>
+<pin name="INT" x="20.32" y="-5.08" length="middle" rot="R90"/>
+<text x="-7.62" y="20.32" size="1.778" layer="94">MPU6050(GY521)</text>
+</symbol>
+<symbol name="MPU6050_SMD">
+<description>EXTERNAL COMPONENTS: 
+Regulator Filter Capacitor (Pin 10) C1 Ceramic, X7R, 0.1µF ±10%, 2V 1  |||  
+VDD Bypass Capacitor (Pin 13) C2 Ceramic, X7R, 0.1µF ±10%, 4V 1  |||  
+Charge Pump Capacitor (Pin 20) C3 Ceramic, X7R, 2.2nF ±10%, 50V 1  |||  
+VLOGIC Bypass Capacitor (Pin 8) C4* Ceramic, X7R, 10nF ±10%, 4V 1  |||  
+______________________________________________________________________
+MPU6050 PINS:
+NC: Not internally connected. May be used for PCB trace routing.  |||  
+LKIN: Optional external reference clock input. Connect to GND if unused.  |||  
+AUX_DA: I2C master serial data, for connecting to external sensors.   |||  
+AUX_CL: I2C Master serial clock, for connecting to external sensors.   |||  
+/CS: SPI chip select (0=SPI mode).  |||  
+VLOGIC: Digital I/O supply voltage.   |||  
+AD0/SDO: I2C Slave Address LSB (AD0); SPI serial data output (SDO).   |||  
+AD0: I2C Slave Address LSB (AD0).  |||  
+REGOUT: Regulator filter capacitor connection.   |||  
+FSYNC: Frame synchronization digital input. Connect to GND if unused.   |||  
+INT: Interrupt digital output (totem pole or open-drain).   |||  
+VDD: Power supply voltage and Digital I/O supply voltage.   |||  
+GND: Power supply ground.   |||  
+RESV: Reserved. Do not connect.   |||  
+CPOUT: Charge pump capacitor connection.   |||  
+RESV: Reserved. Do not connect.   |||  
+SCL/SCLK: I2C serial clock (SCL); SPI serial clock (SCLK).   |||  
+SCL: I2C serial clock (SCL).   |||  
+SDA/SDI: I2C serial data (SDA); SPI serial data input (SDI).   |||  
+SDA: I2C serial data (SDA).   |||</description>
+<wire x1="66.04" y1="0" x2="-5.08" y2="0" width="0.254" layer="94"/>
+<pin name="7_AUX_CL" x="5.08" y="-2.54" length="middle" rot="R90"/>
+<pin name="8_CS/VLOGIC" x="15.24" y="-2.54" length="middle" rot="R90"/>
+<pin name="9_AD0/SDO" x="25.4" y="-2.54" length="middle" rot="R90"/>
+<pin name="10_REGOUT" x="35.56" y="-2.54" length="middle" rot="R90"/>
+<pin name="11_FSYNC" x="45.72" y="-2.54" length="middle" rot="R90"/>
+<pin name="12_INT" x="55.88" y="-2.54" length="middle" rot="R90"/>
+<wire x1="66.04" y1="0" x2="66.04" y2="71.12" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="0" x2="-5.08" y2="71.12" width="0.254" layer="94"/>
+<pin name="13_VDD" x="68.58" y="10.16" length="middle" rot="R180"/>
+<pin name="14_NC" x="68.58" y="20.32" length="middle" rot="R180"/>
+<pin name="15_NC" x="68.58" y="30.48" length="middle" rot="R180"/>
+<pin name="16_NC" x="68.58" y="40.64" length="middle" rot="R180"/>
+<pin name="17NC" x="68.58" y="50.8" length="middle" rot="R180"/>
+<pin name="18_GND" x="68.58" y="60.96" length="middle" rot="R180"/>
+<wire x1="66.04" y1="71.12" x2="-5.08" y2="71.12" width="0.254" layer="94"/>
+<pin name="1_CLKIN" x="-7.62" y="60.96" length="middle"/>
+<pin name="2_NC" x="-7.62" y="50.8" length="middle"/>
+<pin name="3_NC" x="-7.62" y="40.64" length="middle"/>
+<pin name="4_NC" x="-7.62" y="30.48" length="middle"/>
+<pin name="5_NC" x="-7.62" y="20.32" length="middle"/>
+<pin name="6_AUX_DA" x="-7.62" y="10.16" length="middle"/>
+<pin name="24_SDA" x="5.08" y="73.66" length="middle" rot="R270"/>
+<pin name="23_SCL" x="15.24" y="73.66" length="middle" rot="R270"/>
+<pin name="22_RESV" x="25.4" y="73.66" length="middle" rot="R270"/>
+<pin name="21_RESV" x="35.56" y="73.66" length="middle" rot="R270"/>
+<pin name="20_CPOUT" x="45.72" y="73.66" length="middle" rot="R270"/>
+<pin name="19_RESV" x="55.88" y="73.66" length="middle" rot="R270"/>
+<text x="17.78" y="35.56" size="3.81" layer="94">MPU6050</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="MPU6050_SMD" urn="urn:adsk.eagle:component:43081949/1" locally_modified="yes" uservalue="yes">
+<gates>
+<gate name="G$1" symbol="MPU6050_SMD" x="5.08" y="0"/>
+</gates>
+<devices>
+<device name="" package="MPU6050_SMD">
+<connects>
+<connect gate="G$1" pin="10_REGOUT" pad="10_REGOUT"/>
+<connect gate="G$1" pin="11_FSYNC" pad="11_FSYNC"/>
+<connect gate="G$1" pin="12_INT" pad="12_INT"/>
+<connect gate="G$1" pin="13_VDD" pad="13_VDD"/>
+<connect gate="G$1" pin="14_NC" pad="14_NC"/>
+<connect gate="G$1" pin="15_NC" pad="15_NC"/>
+<connect gate="G$1" pin="16_NC" pad="16_NC"/>
+<connect gate="G$1" pin="17NC" pad="17_NC"/>
+<connect gate="G$1" pin="18_GND" pad="18_GND"/>
+<connect gate="G$1" pin="19_RESV" pad="19_RESV"/>
+<connect gate="G$1" pin="1_CLKIN" pad="1_CLKIN"/>
+<connect gate="G$1" pin="20_CPOUT" pad="20_CPOUT"/>
+<connect gate="G$1" pin="21_RESV" pad="21_RESV"/>
+<connect gate="G$1" pin="22_RESV" pad="22_RESV"/>
+<connect gate="G$1" pin="23_SCL" pad="23_SCL"/>
+<connect gate="G$1" pin="24_SDA" pad="24_SDA"/>
+<connect gate="G$1" pin="2_NC" pad="2_NC"/>
+<connect gate="G$1" pin="3_NC" pad="3_NC"/>
+<connect gate="G$1" pin="4_NC" pad="4_NC"/>
+<connect gate="G$1" pin="5_NC" pad="5_NC"/>
+<connect gate="G$1" pin="6_AUX_DA" pad="6_AUX_DA"/>
+<connect gate="G$1" pin="7_AUX_CL" pad="7_AUX_CL"/>
+<connect gate="G$1" pin="8_CS/VLOGIC" pad="8_VLOGIC"/>
+<connect gate="G$1" pin="9_AD0/SDO" pad="9_AD0"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="MPU6050+PACKAGE" package="QFN50P400X400X100-24N">
+<connects>
+<connect gate="G$1" pin="10_REGOUT" pad="10"/>
+<connect gate="G$1" pin="11_FSYNC" pad="11"/>
+<connect gate="G$1" pin="12_INT" pad="12"/>
+<connect gate="G$1" pin="13_VDD" pad="13"/>
+<connect gate="G$1" pin="14_NC" pad="14"/>
+<connect gate="G$1" pin="15_NC" pad="15"/>
+<connect gate="G$1" pin="16_NC" pad="16"/>
+<connect gate="G$1" pin="17NC" pad="17"/>
+<connect gate="G$1" pin="18_GND" pad="18"/>
+<connect gate="G$1" pin="19_RESV" pad="19"/>
+<connect gate="G$1" pin="1_CLKIN" pad="1"/>
+<connect gate="G$1" pin="20_CPOUT" pad="20"/>
+<connect gate="G$1" pin="21_RESV" pad="21"/>
+<connect gate="G$1" pin="22_RESV" pad="22"/>
+<connect gate="G$1" pin="23_SCL" pad="23"/>
+<connect gate="G$1" pin="24_SDA" pad="24"/>
+<connect gate="G$1" pin="2_NC" pad="2"/>
+<connect gate="G$1" pin="3_NC" pad="3"/>
+<connect gate="G$1" pin="4_NC" pad="4"/>
+<connect gate="G$1" pin="5_NC" pad="5"/>
+<connect gate="G$1" pin="6_AUX_DA" pad="6"/>
+<connect gate="G$1" pin="7_AUX_CL" pad="7"/>
+<connect gate="G$1" pin="8_CS/VLOGIC" pad="8"/>
+<connect gate="G$1" pin="9_AD0/SDO" pad="9"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43089087/1"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="GY521" urn="urn:adsk.eagle:component:43081950/1" uservalue="yes">
+<gates>
+<gate name="G$1" symbol="GY521" x="20.32" y="0"/>
+</gates>
+<devices>
+<device name="" package="GY521">
+<connects>
+<connect gate="G$1" pin="ADD" pad="ADD"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="INT" pad="INT"/>
+<connect gate="G$1" pin="SCL" pad="SCL"/>
+<connect gate="G$1" pin="SDA" pad="SDA"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+<connect gate="G$1" pin="XCL" pad="XCL"/>
+<connect gate="G$1" pin="XDA" pad="XDA"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43081948/1"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+</drawing>
+<compatibility>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports URNs for individual library
+assets (packages, symbols, and devices). The URNs of those assets
+will not be understood (or retained) with this version.
+</note>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports the association of 3D packages
+with devices in libraries, schematics, and board files. Those 3D
+packages will not be understood (or retained) with this version.
+</note>
+</compatibility>
+</eagle>
