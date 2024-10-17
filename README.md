@@ -31,7 +31,7 @@ to be written ...
 to be written ...
 
 
-### Future Experimental Functionalities/Payloads:
+# Future Experimental Functionalities/Payloads(not relevant to the HPR certifications):
 - Custom Radio Communication module
 - Reaction Wheel for stabilization of the Roll Axis
 - Fin Control/Thrust Vector Control
