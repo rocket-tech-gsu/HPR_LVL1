@@ -1,36 +1,49 @@
-# Avionics: 
+# AVNIONICS:
+This document contains
+- Components List, &
+- Avionics Pre-Integration Testing Protocol
 
-- At the heart of each rocket is a flight computer. It is responsible for ejecting the parachute, sensing the trajectory, apogee altitude and all sorts of things.
-Our goal with this flight computer will be to make a flight computer that we can use again and again in future for upcoming rockets.
+for information about all three: Engine Test Avionics, Flight Avionics, and Ground Control Avionics.
 
-- Avionics101:
-  - Redundancy must be present in the avionics. If we used two, exactly same flight computers and if there will be a problem in one of them both would fail in exact same way, which is useless redundancy.
-  - We want the pyro charge signals to be able to be triggered by either of the two flight computers.
-  - Voltage regulator must be a really good in terms of noise in the voltage output. Source voltage often introduce noise in the systems, and systems that are very sensitive for the input voltage like a sensistive gyroscope.
-    - Also, there must be something to block the 5V coming from the power input inside the mciroUSB connector in case it's also connceted to external 5V. Otherwise it'll become 10V in total. A **DIODE** can do that.
-    - <img width="543" alt="image" src="https://github.com/rocket-tech-gsu/HPR_LVL1/assets/110617721/57ef1d58-e476-4d0f-9bf7-48a2c86836a5">
-  - As per schematics of the microcontroller there must be capacitors that can help in case of the voltage dips.
+# Components List:
 
+### __<u>Engine Test Avionics Components:</u>__
+- Load Cell Sensor(HX711 amplifier and 2024020278 Load Cell)
 
-# Avionics Components:
-- Microcontroller
-- Resonator
-- Sensors:
-  - Accelerometer
-  - Gyroscope
-  - Pressure Sensor
-  - Cameras
-- Capacitors
-- Resistors
-- Transmitter
-- Receiver
-- Shot key diode
-- Flash Memory Chip
-- N channel efficieny type MOSFET
-- Screw Button
----------
-# Run Eagle files in your computer:
-- For library, you have to download and move in your personal libraries directory.
-- Just copy & paste this Power Supplies Folder in the projects directory of Eagle in your systems.
-- or you can also just copy & paste the .brd & .sch files in a folder in your Eagle's project folder directory.
+### __<u>Flight Avionics Components:</u>__
+- Microcontroller(s):
+    - ESP32 Wroom DevKit Board
 
+- Memory Modules:
+    - SD card(5V ready Micro-SD Breakout Board, from adafruit)
+    - Flash Memory Chip : WQ25 Module
+
+- Sensor Modules:
+    - GPS Sensor(GT-U7 161212989 from Goouu Tech)
+    - Accelerometer and Gyroscope Sensor Module(MPU6050 Module)
+    - Pressure Sensor(BMP280)
+    - Magnetometer Module(???)
+
+- Camera Module:
+    - HawkEye4k Camera Module
+
+- Battery:
+    - 2(in parallel) Li-Ion Cells.
+    - 1 Li-Po Battery.
+    
+- Communication Module \*(*if time permits*):
+    - Radio Frequency Module(E22 900T30D Version 2 from *EBYTE*)
+
+### __<u>Ground Control Avionics Components:</u>__
+- Microcontroller:
+    - ESP32 Wroom DevKit Board
+
+- Communication Module \*(*if time permits*):
+    - Radio Frequency Module(E22 900T30D Version 2 from *EBYTE*)
+
+- Ignition Circuit:
+    - N Channel MOSFET
+    - Li-Polymer Battery
+
+# Avionics Pre-Integration Tests:
+Most Chances of not getting a certification comes from the fact that
