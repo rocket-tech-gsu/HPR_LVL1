@@ -3,11 +3,12 @@
 
 class GPS{
     private:
-        int RX;
-        int TX;
         HardwareSerial &gpsSerial;
     public:
         GPS(HardwareSerial &serial) : gpsSerial(serial) {}
+
+        int RX = 18;
+        int TX = 5;
 
         HardwareSerial &getGPSSerial();
         void set_rx_tx(int r, int t);
@@ -91,7 +92,14 @@ String GPS::get_latitude(String* fields)
 {
     if (fields[0].equals("$GPGGA") && !(fields[2].equals("")))
     {
-        return fields[2] + ", " + fields[3];
+        //return fields[2] + ", " + fields[3];
+        //    **Conversion
+        float decimal = fields[2].toFloat();
+        int degrees = ((int)decimal / 100);
+        int minutes = (int)(decimal - 100*degrees);
+        float seconds = (decimal - trunc(decimal))*60;
+        return String(degrees) + "°" + String(minutes) + "\'" + String(seconds) + "\"" + fields[3]; 
+        return String(degrees) + "°";
     } else {
         return "No info on Latitude";
     }
@@ -100,7 +108,13 @@ String GPS::get_longitude(String* fields)
 {
     if (fields[0].equals("$GPGGA") && !(fields[4].equals("")))
     {
-        return fields[4] + ", " + fields[5];
+        //return fields[4] + ", " + fields[5];
+        //Conversion
+        float decimal = fields[4].toFloat();
+        int degrees = ((int)decimal / 100);
+        int minutes = (int)(decimal - 100*degrees);
+        float seconds = (decimal - trunc(decimal))*60;
+        return String(degrees) + "°" + String(minutes) + "\'" + String(seconds) + "\"" + fields[5]; 
     } else {
         return "No info on Longitude";
     }
@@ -128,15 +142,49 @@ bool GPS::is_fixed(String* fields)
 /*
     How to use:
 
-    Outside setup and loop functions:
-    //make sure 
+    sample code(main.cpp)
+
+    #include <gps.hpp>
+    #include <HardwareSerial.h>
+
+    #define GPS_RX_PIN 18  // GPS TX pin to ESP32 RX (GPIO 0)
+    #define GPS_TX_PIN 5  // GPS RX pin to ESP32 TX (GPIO 4)
+
     GPS gps(Serial1);  // Initialize GPS with Serial1
+
     HardwareSerial gpsSerial(1);
 
-    Inside setup function
 
     void setup() {
+
         Serial.begin(115200);
         gps.startup(GPS_RX_PIN, GPS_TX_PIN);
+        // int RX = 4;
+        // int TX = 0;
+
+        // Serial.begin(115200);  // Serial Monitor output
+        // gpsSerial.begin(9600, SERIAL_8N1, RX, TX);
     }
+
+
+
+    void loop() {
+        if (gps.getGPSSerial().available()) {  // Check if there's GPS data available
+            String nmeaSentence = gps.getGPSSerial().readStringUntil('\n');  // Read one NMEA sentence
+            // Serial.print("NMEA Sentence: ");  // Print the NMEA sentence
+            // Serial.println(nmeaSentence);
+
+            // Optional: Check if the sentence is of type GPGGA
+            if (nmeaSentence.startsWith("$GPGGA")) {
+                Serial.println("GPGGA Sentence Detected!");
+                Serial.println(gps.get_latitude(gps.parsed_data(nmeaSentence)));
+                Serial.println(gps.get_longitude(gps.parsed_data(nmeaSentence)));
+                Serial.println(gps.get_altitude(gps.parsed_data(nmeaSentence)));
+                Serial.println(gps.parsed_data(nmeaSentence)[0]);
+            }
+        }
+
+        delay(10);  // Delay for readability
+    }
+
 */
