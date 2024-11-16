@@ -99,7 +99,6 @@ String GPS::get_latitude(String* fields)
         int minutes = (int)(decimal - 100*degrees);
         float seconds = (decimal - trunc(decimal))*60;
         return String(degrees) + "°" + String(minutes) + "\'" + String(seconds) + "\"" + fields[3]; 
-        return String(degrees) + "°";
     } else {
         return "No info on Latitude";
     }
