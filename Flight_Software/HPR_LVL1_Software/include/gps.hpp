@@ -5,11 +5,15 @@ class GPS{
     private:
         HardwareSerial &gpsSerial;
     public:
-        GPS(HardwareSerial &serial) : gpsSerial(serial) {}
-
+        // CLASS CONSTRUCTOR:
+        GPS(HardwareSerial &serial):
+        gpsSerial(serial)
+        {}
+        // PINs initialization
         int RX = 18;
         int TX = 5;
 
+        // Functions:
         HardwareSerial &getGPSSerial();
         void set_rx_tx(int r, int t);
         int get_rx();

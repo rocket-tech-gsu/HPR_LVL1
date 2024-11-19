@@ -3,19 +3,20 @@
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 
+struct SensorData {
+    float accelX, accelY, accelZ;    // in m/s^2
+    float gyroX, gyroY, gyroZ;       // in rad/s
+    float temperature;                // in °C
+};
+
 class MPU6050Sensor {
 private:
     Adafruit_MPU6050 mpu;
     sensors_event_t a, g, temp;
     
 public:
-    struct SensorData {
-        float accelX, accelY, accelZ;    // in m/s^2
-        float gyroX, gyroY, gyroZ;       // in rad/s
-        float temperature;                // in °C
-    };
 
-    bool begin() {
+    bool startup() {
         Wire.begin(21, 22);  // SDA, SCL
 
         // Try to initialize!

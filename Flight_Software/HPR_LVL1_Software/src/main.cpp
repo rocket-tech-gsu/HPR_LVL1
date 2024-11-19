@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include <../lib/gps.hpp>
-#include <../lib/BMP.hpp>
-#include <../lib/GY_61.hpp> // this needs to be switched with MPU6050
-#include <../lib/SD_Card.hpp>
+#include <../include/gps.hpp>
+#include <../include/BMP.hpp>
+#include <../include/SD_Card.hpp>
+#include <../include/MPU6050.hpp>
 
 // Pin definitions
 #define GPS_RX_PIN 16
@@ -12,8 +12,8 @@
 HardwareSerial gpsSerial(1);
 GPS gps(gpsSerial);
 BMP280Sensor bmp;
-GY_61 accelerometer;
-SD_card sdCard;
+MPU6050Sensor accelerometer;
+SDCardManager sdCard(4);
 
 
 //// TODO: Write a function for count down as per the protocol in the readme ////
@@ -59,8 +59,10 @@ void setup() {
     Serial.println("\n--- Testing SD Card Setup ---");
     sdCard.startup();
     
-    // Write headers to SD card
-    sdCard.Write("Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ");
+    // Write headers to SD card for having the format
+    sdCard.writeFile("../","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ");
+    // sdCard.writeFile(".","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ");
+    // Create a CSV for storing Sensor Data: "Sensors.csv"
 }
 
 void loop() {
@@ -101,8 +103,10 @@ void loop() {
         
         // Accelerometer Data
         Serial.println("\n--- Accelerometer Data ---");
-        float* accelerations = accelerometer.ReadAccelerations();
         
+        accelerometer.printReadings();
+        SensorData accelerations = accelerometer.readSensor();
+
         // // Log data to SD card
         // if (gpsSerial.available()) {
         //     String nmea = gpsSerial.readStringUntil('\n');

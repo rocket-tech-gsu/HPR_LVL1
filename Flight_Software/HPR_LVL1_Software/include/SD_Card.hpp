@@ -41,7 +41,7 @@ public:
         spi(HSPI)
     {}
     // FUNCTIONS:
-    bool begin();
+    bool startup();
     bool writeFile(const char *path, const char *message);
     String readFile(const char *path);
     bool deleteFile(const char *path);
@@ -51,7 +51,7 @@ public:
 };
 
 // FUNCTION IMPLEMENTATIONS:
-bool SDCardManager::begin() {
+bool SDCardManager::startup() {
     Serial.println("Initializing SD card...");
     
     spi.begin(18, 19, 23, chipSelect); // SCK, MISO, MOSI, SS
