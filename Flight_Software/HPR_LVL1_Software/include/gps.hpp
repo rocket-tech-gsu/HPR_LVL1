@@ -3,17 +3,13 @@
 
 class GPS{
     private:
+        int RX = 16;
+        int TX = 17;
         HardwareSerial &gpsSerial;
-    public:
-        // CLASS CONSTRUCTOR:
-        GPS(HardwareSerial &serial):
-        gpsSerial(serial)
-        {}
-        // PINs initialization
-        int RX = 18;
-        int TX = 5;
 
-        // Functions:
+    public:
+        GPS(HardwareSerial &serial) : gpsSerial(serial) {}
+
         HardwareSerial &getGPSSerial();
         void set_rx_tx(int r, int t);
         int get_rx();
@@ -24,10 +20,9 @@ class GPS{
         float get_altitude(String* fields);
         bool is_fixed(String* fields); 
         bool startup(int r, int t);     
-        
 };
 
-//Parses the data into an array of strings with fields
+// Parses the data into an array of strings with fields
 
 HardwareSerial& GPS::getGPSSerial() 
 { 
@@ -50,11 +45,11 @@ int GPS::get_tx()
 bool GPS::startup(int r, int t)
 {
     try{
-        RX = r;
         TX = t;
+        RX = r;
 
         gpsSerial = HardwareSerial(1);
-        gpsSerial.begin(9600, SERIAL_8N1, RX, TX);
+        gpsSerial.begin(9600, SERIAL_8N1, TX, RX);
 
         // Add the code you provided
         gpsSerial.println("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29"); // Set NMEA output
@@ -103,6 +98,7 @@ String GPS::get_latitude(String* fields)
         int minutes = (int)(decimal - 100*degrees);
         float seconds = (decimal - trunc(decimal))*60;
         return String(degrees) + "°" + String(minutes) + "\'" + String(seconds) + "\"" + fields[3]; 
+        return String(degrees) + "°";
     } else {
         return "No info on Latitude";
     }
@@ -150,8 +146,8 @@ bool GPS::is_fixed(String* fields)
     #include <gps.hpp>
     #include <HardwareSerial.h>
 
-    #define GPS_RX_PIN 18  // GPS TX pin to ESP32 RX (GPIO 0)
-    #define GPS_TX_PIN 5  // GPS RX pin to ESP32 TX (GPIO 4)
+    #define GPS_RX_PIN 16  // GPS TX pin to ESP32 RX (GPIO 0)
+    #define GPS_TX_PIN 17  // GPS RX pin to ESP32 TX (GPIO 4)
 
     GPS gps(Serial1);  // Initialize GPS with Serial1
 
@@ -189,5 +185,4 @@ bool GPS::is_fixed(String* fields)
 
         delay(10);  // Delay for readability
     }
-
 */
