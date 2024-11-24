@@ -97,7 +97,7 @@ __Pyro Channels:__
 
 __Microcontroller:__
 - ATmega328P (deprecated)
-- [ATmega328BP](https://www.microchip.com/en-us/product/atmega328pb)
+- [ATmega328PB](https://www.microchip.com/en-us/product/atmega328pb)
 
 __Memory:__
 - Flash memory chip: FLASH - NOR Memory IC 256Mbit SPI - Quad I/O 133 MHz 16-SOIC | Storing the data reliably(soldered connections), quickly(133 MHz)
