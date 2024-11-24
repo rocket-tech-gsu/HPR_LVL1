@@ -1,0 +1,33 @@
+__**This folder will contain all the test files.**__
+
+**Rocket Tech** will follow the following two testing strategies, but before you begin with those you might want to take a look at some beautiful articles PlatformIO have about test driven development:
+```This directory is intended for PlatformIO Test Runner and project tests.
+
+Unit Testing is a software testing method by which individual units of
+source code, sets of one or more MCU program modules together with associated
+control data, usage procedures, and operating procedures, are tested to
+determine whether they are fit for use. Unit testing finds problems early
+in the development cycle.
+
+More information about PlatformIO Unit Testing:
+- https://docs.platformio.org/en/latest/advanced/unit-testing/index.html
+```
+
+## Testing Strategy 1: Unit Testing
+Unit testing all the modules with their respective header files code separately. There are however a few things to be kept in mind:
+- All the code have to be robust and should not break down under any forseable cicumstances. This will take some good amounts of time.
+- Calibration must be tested separately with accuraty and precision in mind.
+
+Once done, beautifully document the classes and methods in the software readme. Other people must not feel too uncomfortable with using your classes and methods.
+
+## Testing Strategy 2: Physical Testing
+Generator Functions that can live generate data that can closely match to what our sensors will generate during the flight. Based on which we will then make sure that:
+- State Estimation algorithm works perfectly.
+- Sensor Fusion algorithm works perfectly.
+
+## Testing Strategy 3: Integrated Testing
+There have to be physical tests on smaller G class rocket motor rockets for:
+- Physical testing of the position estimation.
+- Physical testing of the velocity estimation.
+- Physical testing of the acceleration estimation.
+
