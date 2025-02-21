@@ -59,10 +59,9 @@ void setup() {
     Serial.println("\n--- Testing SD Card Setup ---");
     sdCard.startup();
     
-    // Write headers to SD card for having the format
-    sdCard.writeFile("../","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ");
-    // sdCard.writeFile(".","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ");
+    sdCard.writeFile("/data.txt", "Hello, ESP32!\n");
     // Create a CSV for storing Sensor Data: "Sensors.csv"
+    // sdCard.writeFile(".","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ");
 }
 
 void loop() {

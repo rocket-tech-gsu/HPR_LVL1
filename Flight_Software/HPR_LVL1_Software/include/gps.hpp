@@ -11,20 +11,23 @@ class GPS{
     public:
         GPS(HardwareSerial &serial) : gpsSerial(serial) {}
 
+        HardwareSerial &getGPSSerial();
+
         void set_rx_tx(int r, int t);
         int get_rx();
         int get_tx();
-        String* parsed_data(String nmea);
+        String *parsed_data(String nmea);
         String get_latitude(String* fields);
         String get_longitude(String* fields);
         float get_altitude(String* fields);
         bool is_fixed(String* fields); 
+        bool startup(); // To handle calls without arguments(default args will become RX, TX)
         bool startup(int r, int t);     
 };
 
 // Parses the data into an array of strings with fields
 
-HardwareSerial& GPS::getGPSSerial() 
+HardwareSerial& GPS::getGPSSerial()
 { 
     return gpsSerial; 
 }
@@ -42,6 +45,9 @@ int GPS::get_tx()
 {
     return TX;
 }
+bool GPS::startup(){
+    return startup(RX, TX);
+}
 bool GPS::startup(int r, int t)
 {
     try{
@@ -56,7 +62,7 @@ bool GPS::startup(int r, int t)
         gpsSerial.println("$PMTK220,1000*1F"); // Set 1 Hz update rate
         return true;
     } catch(bool) {
-        Serial.printf("");
+        Serial.printf(" GPS Initilization Failed ");
         return false;
     }
     
