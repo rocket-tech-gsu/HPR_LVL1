@@ -42,7 +42,8 @@ public:
     {}
     // FUNCTIONS:
     bool startup();
-    bool writeFile(const char *path, const char *message);
+    // bool writeFile(const char *path, const char *message);
+    bool writeFile(const char *path, String message);
     String readFile(const char *path);
     bool deleteFile(const char *path);
     bool testCard();
@@ -91,7 +92,26 @@ bool SDCardManager::startup() {
     Serial.printf("SD Card Size: %lluMB\n", cardSize);
     return true;
 }
-bool SDCardManager::writeFile(const char* path, const char* message) {
+// bool SDCardManager::writeFile(const char* path, const char* message) {
+//     if (!cardInitialized) return false;
+    
+//     File file = SD.open(path, FILE_WRITE);
+//     if(!file) {
+//         Serial.println("Failed to open file for writing");
+//         return false;
+//     }
+    
+//     if(file.print(message)) {
+//         Serial.printf("Wrote to file: %s\n", path);
+//         file.close();
+//         return true;
+//     } else {
+//         Serial.println("Write failed");
+//         file.close();
+//         return false;
+//     }
+// }
+bool SDCardManager::writeFile(const char* path, String message) {
     if (!cardInitialized) return false;
     
     File file = SD.open(path, FILE_WRITE);
