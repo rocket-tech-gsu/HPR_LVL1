@@ -22,14 +22,8 @@
 // bool Landed = false;
 
 
-// float curr_bmp_apogee[];
-// float prev_bmp_apogee[];
-
-
 // bool Sensor_tests = true;
 // const int BuzzerPIN = 12;
-
-// // TODO: Write a function for count down as per the protocol in the readme ////
 
 // // Function to format data for SD card logging
 // String formatDataString(String lat, String lon, float alt, float temp, float pressure, float* accel) {
@@ -74,26 +68,28 @@
 //     ////////// All Sensors Successfull: //////////
 //     if (Sensor_tests == false){ // two beeps
 //         tone(BuzzerPIN,1000);
-//         delay(2000);
+//         delay(3000);
 //         noTone(BuzzerPIN);
-//         delay(1000);
-//         tone(BuzzerPIN, 1000);
-//         delay(2000);
-//         noTone(BuzzerPIN);
+//         delay(5000);
+//         // tone(BuzzerPIN, 1000);
+//         // delay(2000);
+//         // noTone(BuzzerPIN);
+//         Serial.println("Sensor Initialization Was Not Perfect!");
 //     }
 //     else{
 //         tone(BuzzerPIN,4000); // Beep 1
-//         delay(500);
+//         delay(100);
 //         noTone(BuzzerPIN);
-//         delay(500);
-//         tone(BuzzerPIN,4000); // Beep 2
-//         delay(500);
+//         delay(100);
+//         tone(BuzzerPIN,5000); // Beep 2
+//         delay(100);
 //         noTone(BuzzerPIN);
-//         delay(500);
-//         tone(BuzzerPIN,4000); // Beep 3
-//         delay(500);
+//         delay(100);
+//         tone(BuzzerPIN,6000); // Beep 3
+//         delay(100);
 //         noTone(BuzzerPIN);
-//         delay(500);
+//         Serial.println("Sensor Initialization Was FUCKING Perfect!");
+//         delay(5000);
 //     }
     
 //     // Test SD Card setup
@@ -120,37 +116,38 @@
 //     ////////// Data Logging Successfull: //////////
 //     if (Sensor_tests == false){ // two beeps
 //         tone(BuzzerPIN,1000);   // Long Beep 1
-//         delay(2000);
+//         delay(3000);
 //         noTone(BuzzerPIN);
 //         delay(1000);
 //         tone(BuzzerPIN, 1000);  // Long Beep 2
-//         delay(2000);
+//         delay(3000);
 //         noTone(BuzzerPIN);
-//         delay(1000);
-//         tone(BuzzerPIN, 1000);  // Long Beep 3
-//         delay(2000);
-//         noTone(BuzzerPIN);
+//         delay(5000);
+//         // tone(BuzzerPIN, 1000);  // Long Beep 3
+//         // delay(2000);
+//         // noTone(BuzzerPIN);
 //     }
 //     else{
 //         tone(BuzzerPIN,4000); // Beep 1
-//         delay(500);
+//         delay(100);
 //         noTone(BuzzerPIN);
-//         delay(500);
-//         tone(BuzzerPIN,4000); // Beep 2
-//         delay(500);
+//         delay(100);
+//         tone(BuzzerPIN,5000); // Beep 2
+//         delay(100);
 //         noTone(BuzzerPIN);
-//         delay(500);
-//         tone(BuzzerPIN,4000); // Beep 3
-//         delay(500);
+//         delay(100);
+//         tone(BuzzerPIN,6000); // Beep 3
+//         delay(100);
 //         noTone(BuzzerPIN);
-//         delay(500);
-//         tone(BuzzerPIN,4000); // Beep 4
-//         delay(500);
+//         tone(BuzzerPIN,7000); // Beep 4
+//         delay(100);
 //         noTone(BuzzerPIN);
-//         delay(500);
+//         tone(BuzzerPIN,8000); // Beep 5
+//         delay(100);
+//         noTone(BuzzerPIN);
+//         Serial.println("Data Logging Was FUCKING Perfect!");
+//         delay(7000);
 //     }
-
-
 
 //     // Create a CSV for storing Sensor Data: "Sensors.csv"
 //     sdCard.writeFile("/data.csv","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ");
@@ -159,7 +156,7 @@
 // void loop() {
 //     if (Mission_Completed !=true){
 //     static unsigned long lastPrint = 0;
-//     const unsigned long PRINT_INTERVAL = 1000; // Print every second
+//     const unsigned long PRINT_INTERVAL = 200;
     
 //     if (millis() - lastPrint >= PRINT_INTERVAL) {
 //         lastPrint = millis();
@@ -200,43 +197,11 @@
 //         SensorData accelerations = accelerometer.readSensor();
 
         
-//         if (isAcending==false){
-            
-//         }
-        
-//         if (Apogee==false){
-            
-//         }
-
-//         if (Apogee==true && Landed==false){
+//         ////////////////////////////////////////
+//         //////// EVENT DETECTION START ////////
+//         //////////////////////////////////////
 
 
-//         }
-
-//         if (landed==true){
-
-//         }
-
-        
-
-
-//         // // Log data to SD card
-//         // if (gpsSerial.available()) {
-//         //     String nmea = gpsSerial.readStringUntil('\n');
-//         //     if (nmea.startsWith("$GPGGA")) {
-//         //         String* parsed = gps.parsed_data(nmea);
-//         //         String dataString = formatDataString(
-//         //             gps.get_latitude(parsed),
-//         //             gps.get_longitude(parsed),
-//         //             gps.get_altitude(parsed),
-//         //             temperature,
-//         //             pressure,
-//         //             accelerations
-//         //         );
-//         //         sdCard.Write(dataString);
-//         //         delete[] parsed;
-//         //     }
-//         // }
         
 //         Serial.println("\n------------------------");
 //     }
