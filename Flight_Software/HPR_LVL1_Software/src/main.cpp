@@ -7,6 +7,7 @@
 // // Pin definitions
 // #define GPS_RX_PIN 16
 // #define GPS_TX_PIN 17
+// #define CSV_BUFFER_SIZE 160
 
 // // Global objects
 // HardwareSerial gpsSerial(1);
@@ -15,24 +16,25 @@
 // MPU6050Sensor accelerometer;
 // SDCardManager sdCard(4);
 
-// bool Mission_Completed = false;
 
-// bool isAcending = false;
-// bool Apogee = false;
-// bool Landed = false;
+// // Sensor Data Variables:
+// static bool Sensor_tests = true;
+// static const int BuzzerPIN = 12;
+// static float pressure;
+// static float bmpAltitude;
+// static float temperature;
+// static unsigned long startTime = 0;
+// static SensorData accelerations;
 
+// static char csvBuffer[CSV_BUFFER_SIZE];
 
-// bool Sensor_tests = true;
-// const int BuzzerPIN = 12;
+// String* parsed;
+// String latitude;
+// String longitude;
+// float gpsAltitude;
 
-// // Function to format data for SD card logging
-// String formatDataString(String lat, String lon, float alt, float temp, float pressure, float* accel) {
-//     String dataString = String(millis()) + ",";
-//     dataString += lat + "," + lon + "," + String(alt) + ",";
-//     dataString += String(temp) + "," + String(pressure) + ",";
-//     dataString += String(accel[0]) + "," + String(accel[1]) + "," + String(accel[2]);
-//     return dataString;
-// }
+// // Function Declarations
+// void pressButton();
 
 // void setup() {
 //     Serial.begin(115200);
@@ -92,6 +94,7 @@
 //         delay(5000);
 //     }
     
+    
 //     // Test SD Card setup
 //     Serial.println("\n--- Testing SD Card Setup ---");
 //     sdCard.startup();
@@ -112,6 +115,7 @@
 //     }
 //     Serial.println("File content:");
 //     Serial.println(content);
+    
     
 //     ////////// Data Logging Successfull: //////////
 //     if (Sensor_tests == false){ // two beeps
@@ -150,63 +154,63 @@
 //     }
 
 //     // Create a CSV for storing Sensor Data: "Sensors.csv"
-//     sdCard.writeFile("/data.csv","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ");
+//     sdCard.writeFile("/data1.csv","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ,MPU_Temperature\n");
 // }
 
-// void loop() {
-//     if (Mission_Completed !=true){
+// ////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////
+
+// void loop(){
 //     static unsigned long lastPrint = 0;
-//     const unsigned long PRINT_INTERVAL = 200;
+//     const unsigned long PRINT_INTERVAL = 500; // Print every 500 ms
+//     unsigned long currTime = millis();
     
-//     if (millis() - lastPrint >= PRINT_INTERVAL) {
-//         lastPrint = millis();
+//     if (currTime - lastPrint >= PRINT_INTERVAL) {
+//         lastPrint = currTime;
         
-//         // GPS Data
+//         // Variables for GPS data
+//         String latStr = "0";
+//         String lonStr = "0";
+//         float gpsAltitude = 0.0;
+        
+//         // Read and process GPS data once
 //         if (gpsSerial.available()) {
 //             String nmea = gpsSerial.readStringUntil('\n');
 //             if (nmea.startsWith("$GPGGA")) {
-//                 String* parsed = gps.parsed_data(nmea);
-//                 String latitude = gps.get_latitude(parsed);
-//                 String longitude = gps.get_longitude(parsed);
-//                 float gpsAltitude = gps.get_altitude(parsed);
-                
-//                 Serial.println("\n--- GPS Data ---");
-//                 Serial.println("Latitude: " + latitude);
-//                 Serial.println("Longitude: " + longitude);
-//                 Serial.println("GPS Altitude: " + String(gpsAltitude) + "m");
-//                 Serial.println("Fix Status: " + String(gps.is_fixed(parsed) ? "Fixed" : "No Fix"));
-                
-//                 delete[] parsed;
+//                 // Parse the NMEA sentence
+//                 String* fields = gps.parsed_data(nmea);
+//                 latStr = gps.get_latitude(fields);
+//                 lonStr = gps.get_longitude(fields);
+//                 gpsAltitude = gps.get_altitude(fields);
+//                 delete[] fields;  // Free the allocated memory
 //             }
 //         }
         
-//         // BMP280 Data
-//         float temperature = bmp.readTemperature();
-//         float pressure = bmp.readPressure();
-//         float bmpAltitude = bmp.readAltitude();
-        
-//         Serial.println("\n--- BMP280 Data ---");
-//         Serial.println("Temperature: " + String(temperature) + "Â°C");
-//         Serial.println("Pressure: " + String(pressure) + "Pa");
-//         Serial.println("BMP Altitude: " + String(bmpAltitude) + "m");
-        
-//         // Accelerometer Data
-//         Serial.println("\n--- Accelerometer Data ---");
-        
-//         accelerometer.printReadings();
-//         SensorData accelerations = accelerometer.readSensor();
+//         // BMP280 and accelerometer data
+//         temperature = bmp.readTemperature();
+//         pressure = bmp.readPressure();
+//         bmpAltitude = bmp.readAltitude();
+//         accelerations = accelerometer.readSensor();
 
+//         // Create CSV string using snprintf
+//         snprintf(csvBuffer, CSV_BUFFER_SIZE,
+//                  "%lu,%s,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
+//                  millis(),
+//                  latStr.c_str(),
+//                  lonStr.c_str(),
+//                  bmpAltitude,
+//                  temperature,
+//                  pressure,
+//                  accelerations.accelX,
+//                  accelerations.accelY,
+//                  accelerations.accelZ,
+//                  accelerations.gyroX,
+//                  accelerations.gyroY,
+//                  accelerations.gyroZ,
+//                  accelerations.temperature);
         
-//         ////////////////////////////////////////
-//         //////// EVENT DETECTION START ////////
-//         //////////////////////////////////////
-
-
-        
-//         Serial.println("\n------------------------");
-//     }
-// }
-//     else{
-//         ; // Chill
+//         // Append the CSV string to the file
+//         sdCard.appendFile("/data1.csv", csvBuffer);
 //     }
 // }
