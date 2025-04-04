@@ -96,9 +96,9 @@ sensorval mpu9250::getvalues() {
         return values;
     } 
     
-    catch(...)[
+    catch(...){
         return NULL;
-    ]
+    }
 }
 
 
