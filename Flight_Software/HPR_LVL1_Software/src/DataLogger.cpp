@@ -185,7 +185,7 @@
 //                 delete[] fields;  // Free the allocated memory
 //             }
 //         }
-        
+
 //         // BMP280 and accelerometer data
 //         temperature = bmp.readTemperature();
 //         pressure = bmp.readPressure();
