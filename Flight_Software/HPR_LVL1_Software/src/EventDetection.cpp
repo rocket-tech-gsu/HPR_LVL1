@@ -1,3 +1,5 @@
+// COMMENT OUT ALL THE SERIAL PRINTS BEFORE FLIGHT!
+
 #include <Arduino.h>
 #include <cmath>
 #include <algorithm> // For std::copy
@@ -5,6 +7,7 @@
 #include <../include/BMP.hpp>
 #include <../include/SD_Card.hpp>
 #include <../include/MPU6050.hpp>
+#include <../include/tones.hpp>
 
 // Pin definitions
 #define GPS_RX_PIN 16
@@ -34,6 +37,7 @@ static unsigned long startTime = 0;
 static SensorData accelerations;
 
 static char csvBuffer[CSV_BUFFER_SIZE];
+static char csvBuffer2[CSV_BUFFER_SIZE];
 static float Pressures[PRESSURE_BUFFER_SIZE];
 static float Pressures_window1[PRESSURE_WINDOW_SIZE];
 static float Pressures_window2[PRESSURE_WINDOW_SIZE];
@@ -41,14 +45,13 @@ static float pressure_old_mean;
 static float pressure_new_mean;
 
 static float acc_mag;
-static float acc_threshold = 9.81*1.5;
+static float acc_threshold = 9.81*1.2;
 
 static bool Launched = false;
 static bool Apogee = false;
 static bool Landed = false;
 
-
-static int counter_threshold = 5;
+static int counter_threshold = 8;
 static int landing_counter_threshold = 10;
 
 static int launchCounter;
@@ -188,19 +191,19 @@ void setup() {
     }
 
     // Create a CSV for storing Sensor Data: "Sensors.csv"
-    sdCard.writeFile("/data1.csv","Time,Latitude,Longitude,Altitude,Temperature,Pressure,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ,MPU_Temperature\n");
+    sdCard.writeFile("/data1.csv","Time,Latitude,Longitude,GPS_Altitude,BMP_Altitude,BMP_Temperature,Pressure,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ,MPU_Temperature\n");
+    sdCard.writeFile("/counters_data.csv","launchCounter, apogeeCounter, landedCounter\n");
 }
 
-////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
 void loop(){
     static unsigned long lastPrint = 0;
-    const unsigned long PRINT_INTERVAL = 500; // Print every 500 ms
+    const unsigned long dT = 2; // Refresh rate: run only after every dT ms
     unsigned long currTime = millis();
-    
-    if (currTime - lastPrint >= PRINT_INTERVAL) {
+
+    if (currTime - lastPrint >= dT) {
         lastPrint = currTime;
         
         // Variables for GPS data
@@ -221,39 +224,63 @@ void loop(){
             }
         }
                 
-        
-        accelerations = accelerometer.readSensor();
+        accelerations = accelerometer.readSensor(); // Accelerometer + Gyroscope + Temperature
         // BMP280 and accelerometer data
         temperature = bmp.readTemperature();
         pressure = bmp.readPressure();
         bmpAltitude = bmp.readAltitude();
+        
+        // Create CSV string using snprintf
+        snprintf(csvBuffer, CSV_BUFFER_SIZE,
+            "%lu,%s,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
+            millis(),
+            latStr.c_str(),
+            lonStr.c_str(),
+            gpsAltitude,
+            bmpAltitude,
+            temperature,
+            pressure,
+            accelerations.accelX,
+            accelerations.accelY,
+            accelerations.accelZ,
+            accelerations.gyroX,
+            accelerations.gyroY,
+            accelerations.gyroZ,
+            accelerations.temperature);
+        
+            
+        // Append the CSV string to the file
+        sdCard.appendFile("/data1.csv", csvBuffer);
+        tone(BuzzerPIN, 22000);
+        delay(2);
+        noTone(BuzzerPIN);
 
-        
+        ////////////////////// EVENT DETECTION START //////////////////////
         // Using std::copy (efficient and readable)
-        
-        if (pressures_populated){
+        Serial.printf("P-Buffer Status: %d\n", pressures_populated);
+        Serial.printf("P-Standard Deviation Status: %d\n", std_populated);
+        if (pressures_populated)
+        {
             if(!std_populated){
                 pressureStd_new = calculateStd(Pressures, PRESSURE_BUFFER_SIZE);
                 pressureStd_old = pressureStd_new;
             }
-            else{
-                if(currTime<60000){
-                    pressureStd_new = calculateStd(Pressures, PRESSURE_BUFFER_SIZE);
-                    pressureStd_old = max(pressureStd_old,pressureStd_new);
-                }
-                else{// Standard Deviation Calculations Done
-                    std_populated = true;
-                    tone(BuzzerPIN,2000);
-                    delay(200);
-                    tone(BuzzerPIN, 8000);
-                    delay(200);
-                    noTone(BuzzerPIN);
-                    tone(BuzzerPIN,2000);
-                    delay(200);
-                    tone(BuzzerPIN, 8000);
-                    delay(200);
-                    noTone(BuzzerPIN);
-                }
+            if(currTime<20000){
+                pressureStd_new = calculateStd(Pressures, PRESSURE_BUFFER_SIZE);
+                pressureStd_old = max(pressureStd_old,pressureStd_new);
+            }
+            else if(!std_populated){// Beep When Standard Deviation Calculations Done
+                std_populated = true;
+                tone(BuzzerPIN,2000);
+                delay(2000);
+                tone(BuzzerPIN, 8000);
+                delay(200);
+                noTone(BuzzerPIN);
+                tone(BuzzerPIN,2000);
+                delay(200);
+                tone(BuzzerPIN, 8000);
+                delay(200);
+                noTone(BuzzerPIN);
             }
 
             leftShiftArray_Copy(Pressures, PRESSURE_BUFFER_SIZE, pressure);
@@ -269,19 +296,27 @@ void loop(){
             if(!Launched){
                 if(launchCounter>counter_threshold){
                     Launched = true;
+                    sdCard.appendFile("/data1.csv", "---Launched---");
                     Serial.println("Launched!");
                 }
                 else if((pressure_old_mean-pressure_new_mean)>pressureStd_old && acc_mag > acc_threshold){
                     launchCounter += 1;
+                    tone(BuzzerPIN, 4000);
+                    delay(4);
+                    noTone(BuzzerPIN);
                 }
                 else{
                     launchCounter = 0;
                 }
             }
-
+            
             else if(!Apogee){
                 if(apogeeCounter>counter_threshold){
                     Apogee = true;
+                    sdCard.appendFile("/data1.csv", "---Apogee---");
+                    tone(BuzzerPIN, 12000);
+                    delay(4);
+                    noTone(BuzzerPIN);
                     Serial.println("Apogee!");
                 }
                 else if((pressure_new_mean-pressure_old_mean)>pressureStd_old){
@@ -291,16 +326,19 @@ void loop(){
                     apogeeCounter = 0;
                 }
             }
-
+            
             if(Apogee && !Landed){
                 if(landedCounter>landing_counter_threshold){
                     Landed = true;
+                    sdCard.appendFile("/data1.csv", "---Launched---");
                     Serial.println("Landed!");
+                    ImperialMarchTone();
                 }
                 else if(abs(pressure_new_mean-pressure_old_mean)<pressureStd_old){
                     landedCounter += 1;
                     Serial.println("Absolute difference in pressure windows ");
                     Serial.println(String(abs(pressure_new_mean-pressure_old_mean)));
+                    
                 }
                 else{
                     landedCounter = 0;
@@ -310,32 +348,21 @@ void loop(){
         else{
             Pressures[loop_counter] = pressure;
         }
+
         loop_counter += 1;
-        if (loop_counter%30 == 0){
+        if (loop_counter%PRESSURE_BUFFER_SIZE == 0){
             loop_counter = 0;
             pressures_populated = true;
         }
-
-
-        // Create CSV string using snprintf
-        snprintf(csvBuffer, CSV_BUFFER_SIZE,
-                 "%lu,%s,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
-                 millis(),
-                 latStr.c_str(),
-                 lonStr.c_str(),
-                 bmpAltitude,
-                 temperature,
-                 pressure,
-                 accelerations.accelX,
-                 accelerations.accelY,
-                 accelerations.accelZ,
-                 accelerations.gyroX,
-                 accelerations.gyroY,
-                 accelerations.gyroZ,
-                 accelerations.temperature);
-        
-        // Append the CSV string to the file
-        sdCard.appendFile("/data1.csv", csvBuffer);
+        // Debug Data
+        snprintf(csvBuffer2, CSV_BUFFER_SIZE,
+            "%lu,%.2f,%.2f,%.2f\n",
+            millis(),
+            launchCounter,
+            apogeeCounter,
+            landedCounter);
+        sdCard.appendFile("/counters_data.csv", csvBuffer2);
+        ////////////////////// EVENT DETECTION ENDS //////////////////////
     }
 }
 
