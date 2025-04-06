@@ -1,72 +1,110 @@
+#ifndef GY271_SENSOR_HPP
+#define GY271_SENSOR_HPP
+
+#include <Arduino.h>
 #include <Wire.h>
-#include <HMC5883L_Simple.h>
+#include <Adafruit_HMC5883_U.h>
+#include <Adafruit_Sensor.h>
+#include <math.h> // for atan2, PI
 
-HMC5883L_Simple Compass;
+/*
+  developed by "Rocket Technologies GSU"
+  This Library is a wrapper on Popular Arduino Libraries.
 
-struct SensorData{
-    float x;
-    float y;
-    float z;
-    float heading;
+  For the GY-271 Magnetometer Breakout Sensor using I2C.
 
-}
+  Default Wiring & Address:
+    - SDA: GPIO 21
+    - SCL: GPIO 22
+    - HMC5883L I2C Address: 0x1E (handled internally by the Adafruit library)
 
-class Magnetometer {
-    
+  The library uses a declination angle (in radians) to correct the heading.
+  Adjust the declination angle to match your geographic location.
+*/
 
-public:
-    int x;
-    int y;
-    int z;
-    SensorData val;
-    bool startup();
-    SensorData getReadings();
-
-private:
+// Data structure for storing magnetometer readings
+struct MagnetometerData {
+    float x;       // Magnetic field along X-axis (uT)
+    float y;       // Magnetic field along Y-axis (uT)
+    float z;       // Magnetic field along Z-axis (uT)
+    float heading; // Calculated heading (in degrees)
 };
 
-bool Magnetometer::startup() {
-    Serial.begin(9600);
-    Wire.begin();
-    
-    // Initialize Compass settings
-    if(!Compass.SetDeclination(23, 35, 'E')||!Compass.SetSamplingMode(COMPASS_SINGLE)
-    ||!Compass.SetScale(COMPASS_SCALE_088)||!Compass.SetOrientation(COMPASS_HORIZONTAL_X_NORTH)
-    ||Compass.calibrate()){
-        return false;
+class GY271Sensor {
+public:
+    // Constructor: Initializes the sensor object with a unique ID.
+    GY271Sensor() : mag(12345), declinationAngle(0.22) {}
+
+    /**
+     * @brief Initializes the magnetometer sensor.
+     * 
+     * This function begins I2C communication, initializes the sensor, and
+     * displays its details via the Serial monitor.
+     * 
+     * @return true if the sensor is detected and initialized, false otherwise.
+     */
+    bool startup() {
+        Wire.begin();  // Initialize I2C
+        if (!mag.begin()) {
+            Serial.println("GY271Sensor: No HMC5883 detected! Check wiring!");
+            return false;
+        }
+        
+        // Display sensor details for verification
+        sensor_t sensor;
+        mag.getSensor(&sensor);
+        Serial.println("------------------------------------");
+        Serial.print("Sensor:       "); Serial.println(sensor.name);
+        Serial.print("Driver Ver:   "); Serial.println(sensor.version);
+        Serial.print("Unique ID:    "); Serial.println(sensor.sensor_id);
+        Serial.print("Max Value:    "); Serial.print(sensor.max_value); Serial.println(" uT");
+        Serial.print("Min Value:    "); Serial.print(sensor.min_value); Serial.println(" uT");
+        Serial.print("Resolution:   "); Serial.print(sensor.resolution); Serial.println(" uT");  
+        Serial.println("------------------------------------");
+        Serial.println("");
+        delay(500);
+        
+        return true;
     }
-    //getCalibrationOffsets() returns the calibration offsets
-    //SetDataRate(rate) can also be initialized for 10/50/100hz
-    return true;
-}
 
-SensorData Magnetometer::getReadings() {
-    val.heading = Compass.GetHeadingDegrees();
-    compass.GetRawAxes(&val.x, &val.y, &val.z);
+    /**
+     * @brief Reads the sensor and returns magnetometer data.
+     * 
+     * It retrieves the magnetic field measurements, calculates the heading 
+     * (with declination correction), and returns the values in a MagnetometerData struct.
+     * 
+     * @return MagnetometerData containing x, y, z values (in micro-Tesla) and heading (in degrees).
+     */
+    MagnetometerData readSensor() {
+        MagnetometerData data;
+        sensors_event_t event;
+        mag.getEvent(&event);
+        
+        data.x = event.magnetic.x;
+        data.y = event.magnetic.y;
+        data.z = event.magnetic.z;
+        
+        // Calculate heading in radians
+        float heading = atan2(event.magnetic.y, event.magnetic.x);
+        // Apply declination correction
+        heading += declinationAngle;
+        
+        // Normalize to 0 ~ 2PI
+        if (heading < 0)
+            heading += 2 * PI;
+        if (heading > 2 * PI)
+            heading -= 2 * PI;
+        
+        // Convert radians to degrees
+        data.heading = heading * 180.0 / PI;
+        return data;
+    }
 
-    return val;
-    
-}
+private:
+    // Instance of the Adafruit_HMC5883_Unified sensor
+    Adafruit_HMC5883_Unified mag;
+    // Declination angle in radians (default ~0.22 rad; adjust as needed)
+    float declinationAngle;
+};
 
-
-//usage>>
-
-
-
-
-//the magnetometer has two modes for sampling: single and continous. The difference being that continuous is always reading values, whilst single only samples when you call it. 
-
-// Magnetic Declination is the correction applied according to your present location, so it should be tuned to the location of the launch site in the final flight software.
-
-// The scale is sorted from most sensitive to least sensitive, there is a default option, but if we want to account for high noise probability we should choose one on the upper bound of these options: Options are 088, 130 (default), 190, 250, 400, 470, 560, 810
-
-// Orientation: Allows to configure different mounting axis: 
-
-// COMPASS_HORIZONTAL_X_NORTH (default), the compass is oriented horizontally, top-side up. when pointing North the X silkscreen arrow will point North
-
-// COMPASS_HORIZONTAL_Y_NORTH, top-side up, Y is the needle,when pointing North the Y silkscreen arrow will point North
-
-// COMPASS_VERTICAL_X_EAST,    vertically mounted (tall) looking at the top side, when facing North the X silkscreen arrow will point East
-
-// COMPASS_VERTICAL_Y_WEST,    vertically mounted (wide) looking at the top side, when facing North the Y silkscreen arrow will point West
-// GY-271 set up and usage^^^
+#endif // GY271_SENSOR_HPP

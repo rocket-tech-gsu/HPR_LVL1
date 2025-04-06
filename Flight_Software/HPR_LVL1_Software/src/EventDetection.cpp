@@ -8,6 +8,7 @@
 #include <../include/SD_Card.hpp>
 #include <../include/MPU6050.hpp>
 #include <../include/tones.hpp>
+#include <../include/GY271.hpp>
 
 // Pin definitions
 #define GPS_RX_PIN 16
@@ -21,6 +22,7 @@ HardwareSerial gpsSerial(1);
 GPS gps(gpsSerial);
 BMP280Sensor bmp;
 MPU6050Sensor accelerometer;
+GY271Sensor magnetometer;
 SDCardManager sdCard(4);
 static int loop_counter = 0;
 static bool pressures_populated = false;
@@ -35,6 +37,7 @@ static float bmpAltitude;
 static float temperature;
 static unsigned long startTime = 0;
 static SensorData accelerations;
+static MagnetometerData magnetometer_data;
 
 static char csvBuffer[CSV_BUFFER_SIZE];
 static char csvBuffer2[CSV_BUFFER_SIZE];
@@ -104,6 +107,19 @@ void setup() {
         Sensor_tests = false;
     }
     
+    // Test Magnetometer:
+    magnetometer.startup();
+    magnetometer_data = magnetometer.readSensor();
+    Serial.print("X: ");
+    Serial.print(magnetometer_data.x);
+    Serial.print(" Y: ");
+    Serial.print(magnetometer_data.y);
+    Serial.print(" Z: ");
+    Serial.print(magnetometer_data.z);
+    Serial.print(" Heading: ");
+    Serial.println(magnetometer_data.heading);
+
+
     ////////// All Sensors Successfull: //////////
     if (Sensor_tests == false){ // two beeps
         tone(BuzzerPIN,1000);
@@ -191,7 +207,7 @@ void setup() {
     }
 
     // Create a CSV for storing Sensor Data: "Sensors.csv"
-    sdCard.writeFile("/data1.csv","Time,Latitude,Longitude,GPS_Altitude,BMP_Altitude,BMP_Temperature,Pressure,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ,MPU_Temperature\n");
+    sdCard.writeFile("/pre_flight_test.csv","Time,Latitude,Longitude,GPS_Altitude,BMP_Altitude,BMP_Temperature,Pressure,AccelX,AccelY,AccelZ,GyroX,GyroY,GyroZ,MPU_Temperature,Mag_X,Mag_Y,Mag_Z,Heading\n");
     sdCard.writeFile("/counters_data.csv","launchCounter, apogeeCounter, landedCounter\n");
 }
 
@@ -229,10 +245,11 @@ void loop(){
         temperature = bmp.readTemperature();
         pressure = bmp.readPressure();
         bmpAltitude = bmp.readAltitude();
-        
+        magnetometer_data = magnetometer.readSensor();
+
         // Create CSV string using snprintf
         snprintf(csvBuffer, CSV_BUFFER_SIZE,
-            "%lu,%s,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
+            "%lu,%s,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
             millis(),
             latStr.c_str(),
             lonStr.c_str(),
@@ -246,19 +263,25 @@ void loop(){
             accelerations.gyroX,
             accelerations.gyroY,
             accelerations.gyroZ,
-            accelerations.temperature);
+            accelerations.temperature,
+            magnetometer_data.x,
+            magnetometer_data.y,
+            magnetometer_data.z,
+            magnetometer_data.heading
+        );
         
             
         // Append the CSV string to the file
-        sdCard.appendFile("/data1.csv", csvBuffer);
+        // Serial.println( csvBuffer);
+        sdCard.appendFile("/pre_flight_test.csv", csvBuffer);
         tone(BuzzerPIN, 22000);
         delay(2);
         noTone(BuzzerPIN);
 
         ////////////////////// EVENT DETECTION START //////////////////////
         // Using std::copy (efficient and readable)
-        Serial.printf("P-Buffer Status: %d\n", pressures_populated);
-        Serial.printf("P-Standard Deviation Status: %d\n", std_populated);
+        // Serial.printf("P-Buffer Status: %d\n", pressures_populated);
+        // Serial.printf("P-Standard Deviation Status: %d\n", std_populated);
         if (pressures_populated)
         {
             if(!std_populated){
@@ -296,8 +319,8 @@ void loop(){
             if(!Launched){
                 if(launchCounter>counter_threshold){
                     Launched = true;
-                    sdCard.appendFile("/data1.csv", "---Launched---");
-                    Serial.println("Launched!");
+                    sdCard.appendFile("/pre_flight_test.csv", "---Launched---");
+                    // Serial.println("Launched!");
                 }
                 else if((pressure_old_mean-pressure_new_mean)>pressureStd_old && acc_mag > acc_threshold){
                     launchCounter += 1;
@@ -313,11 +336,11 @@ void loop(){
             else if(!Apogee){
                 if(apogeeCounter>counter_threshold){
                     Apogee = true;
-                    sdCard.appendFile("/data1.csv", "---Apogee---");
+                    sdCard.appendFile("/pre_flight_test.csv", "---Apogee---");
                     tone(BuzzerPIN, 12000);
                     delay(4);
                     noTone(BuzzerPIN);
-                    Serial.println("Apogee!");
+                    // Serial.println("Apogee!");
                 }
                 else if((pressure_new_mean-pressure_old_mean)>pressureStd_old){
                     apogeeCounter += 1;
@@ -330,14 +353,14 @@ void loop(){
             if(Apogee && !Landed){
                 if(landedCounter>landing_counter_threshold){
                     Landed = true;
-                    sdCard.appendFile("/data1.csv", "---Launched---");
-                    Serial.println("Landed!");
+                    sdCard.appendFile("/pre_flight_test.csv", "---Launched---");
+                    // Serial.println("Landed!");
                     ImperialMarchTone();
                 }
                 else if(abs(pressure_new_mean-pressure_old_mean)<pressureStd_old){
                     landedCounter += 1;
-                    Serial.println("Absolute difference in pressure windows ");
-                    Serial.println(String(abs(pressure_new_mean-pressure_old_mean)));
+                    // Serial.println("Absolute difference in pressure windows ");
+                    // Serial.println(String(abs(pressure_new_mean-pressure_old_mean)));
                     
                 }
                 else{
