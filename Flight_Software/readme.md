@@ -1,4 +1,5 @@
 # Flight Software Main:
+This software has been on 5 different flight. Event detection has been successful on 3/3 flights, in the very first iteration!
 
 # Flight Footage:
 
